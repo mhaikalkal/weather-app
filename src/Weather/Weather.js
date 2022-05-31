@@ -28,6 +28,7 @@ const Weather = () => {
         .then((response) => {
           setCityWeather([response.data]);
           console.log(response.data);
+          setCity("");
           setSearchedCityExist(true);
         })
         .catch((error) => {
@@ -45,9 +46,7 @@ const Weather = () => {
     <>
       <div className="top">
         <WeatherInput city={city} change={handleChange} submit={handleSubmit} />
-      </div>
 
-      <div className="main">
         {cityWeather.map((city) => {
           return <CityWeather key={city.sys.id} {...city} />;
         })}
@@ -69,11 +68,18 @@ const WeatherInput = (props) => {
 };
 
 const CityWeather = ({ main, name, weather }) => {
+  const url = `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+
   return (
     <div className="weather">
-      <h5>{name}</h5>
-      <h1>{main.temp} °C</h1>
-      <p>{weather[0].main}</p>
+      <div className="main">
+        <p className="weather-name">{name}</p>
+        <h1 className="weather-temp">{main.temp} °C</h1>
+      </div>
+      <div className="description">
+        <img src={url} alt={weather[0].description} className="weather-icon" />
+        <p className="weather-desc">{weather[0].main}</p>
+      </div>
     </div>
   );
 };
