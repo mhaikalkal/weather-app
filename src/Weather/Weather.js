@@ -66,7 +66,7 @@ const WeatherInput = (props) => {
   );
 };
 
-const CityWeather = ({ main, name, weather }) => {
+const CityWeather = ({ main, name, weather, wind }) => {
   const url = `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
 
   return (
@@ -85,15 +85,15 @@ const CityWeather = ({ main, name, weather }) => {
       <div className="bottom">
         <div className="additional">
           <h3 className="additional-title">Feels Like</h3>
-          <p className="additional-info">32 °C</p>
+          <p className="additional-info">{main.feels_like} °C</p>
         </div>
         <div className="additional">
           <h3 className="additional-title">Humidity</h3>
-          <p className="additional-info">60</p>
+          <p className="additional-info">{main.humidity}</p>
         </div>
         <div className="additional">
           <h3 className="additional-title">Wind Speed</h3>
-          <p className="additional-info">6 MPH</p>
+          <p className="additional-info">{wind.speed} MPH</p>
         </div>
       </div>
     </>
