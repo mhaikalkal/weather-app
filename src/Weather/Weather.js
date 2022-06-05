@@ -27,7 +27,7 @@ const Weather = () => {
       getCityWeather()
         .then((response) => {
           setCityWeather([response.data]);
-          console.log(response.data);
+          // console.log(response.data);
           setCity("");
           setSearchedCityExist(true);
         })
