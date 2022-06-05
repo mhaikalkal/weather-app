@@ -46,11 +46,10 @@ const Weather = () => {
     <>
       <div className="top">
         <WeatherInput city={city} change={handleChange} submit={handleSubmit} />
-
-        {cityWeather.map((city) => {
-          return <CityWeather key={city.sys.id} {...city} />;
-        })}
       </div>
+      {cityWeather.map((city) => {
+        return <CityWeather key={city.sys.id} {...city} />;
+      })}
     </>
   );
 };
@@ -71,16 +70,33 @@ const CityWeather = ({ main, name, weather }) => {
   const url = `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
 
   return (
-    <div className="weather">
+    <>
       <div className="main">
-        <p className="weather-name">{name}</p>
-        <h1 className="weather-temp">{main.temp} °C</h1>
+        <div className="weather">
+          <p className="weather-name">{name}</p>
+          <h1 className="weather-temp">{main.temp} °C</h1>
+        </div>
+        <div className="description">
+          <img src={url} alt={weather[0].description} className="weather-icon" />
+          <p className="weather-desc">{weather[0].main}</p>
+        </div>
       </div>
-      <div className="description">
-        <img src={url} alt={weather[0].description} className="weather-icon" />
-        <p className="weather-desc">{weather[0].main}</p>
+
+      <div className="bottom">
+        <div className="additional">
+          <h3 className="additional-title">Feels Like</h3>
+          <p className="additional-info">32 °C</p>
+        </div>
+        <div className="additional">
+          <h3 className="additional-title">Humidity</h3>
+          <p className="additional-info">60</p>
+        </div>
+        <div className="additional">
+          <h3 className="additional-title">Wind Speed</h3>
+          <p className="additional-info">6 MPH</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
